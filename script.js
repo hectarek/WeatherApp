@@ -5,8 +5,9 @@ window.addEventListener('load', ()=>{
     let temperatureDescription = document.querySelector(".temperature-description");
     let temperatureDegree = document.querySelector(".temperature-degree");
     let locationTimezone = document.querySelector(".location-timezone");
-    let temperatureSection = document.querySelector('.temperature');
+    let temperatureSection = document.querySelector('.degrees-section');
     const temperatureSpan = document.querySelector('.temperature span')
+    let bodyColor = document.querySelector('body')
 
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -24,8 +25,8 @@ window.addEventListener('load', ()=>{
                 .then(data => {
                 console.log(data);
                 const {temperature, summary, icon} = data.currently;
+               
                 // Set DOM elements from the API
-                
                 temperatureDegree.textContent = temperature;
                 temperatureDescription.textContent = summary;
                 locationTimezone.textContent = data.timezone;
@@ -33,19 +34,29 @@ window.addEventListener('load', ()=>{
                 //Formula for Celsius
                 let celcius = (temperature - 32) * (5/9)
 
-                    //Set Icon
-                    setIcons(icon, document.querySelector('.icon'))
+                //Set Icon
+                setIcons(icon, document.querySelector('.icon'))
 
                 //On click, changes to C and back.
                 temperatureSection.addEventListener('click', ()=>{
-                    if (temperatureSpan.textContent === 'F') {
-                        temperatureSpan.textContent = 'C';
+                    if (temperatureSpan.textContent === '°F') {
+                        temperatureSpan.textContent = '°C';
                         temperatureDegree.textContent = celcius.toFixed(2)
                     } else {
-                        temperatureSpan.textContent = "F";
+                        temperatureSpan.textContent = "°F";
                         temperatureDegree.textContent = temperature;
                     }
                 })
+
+                //Change background depending on the temp
+                if (temperature >= 70) {
+                    bodyColor.style.background = "linear-gradient(rgb(255, 240, 117), rgb(223, 72, 30))"
+                } else if (temperature <= 50){
+                    bodyColor.style.background = "linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143))"
+                } else {
+                    bodyColor.style.background = "linear-gradient(rgb(236, 236, 236), rgb(86, 86, 86))"
+                }
+
             });
         })
 
@@ -53,7 +64,7 @@ window.addEventListener('load', ()=>{
         h1.textContent = "Hey, this is not working becasue of: "
     }
 
-
+    //Change Icon for the current weather.
     function setIcons(icon, iconID) {
         const skycons = new Skycons({color: 'white'});
         const currentIcon = icon.replace(/-/g, "_").toUpperCase();

@@ -10,8 +10,9 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
-    font-family: sans-serif;
+    position: relative;
+    background: linear-gradient(rgb(236, 236, 236), rgb(129, 129, 129));
+    font-family: 'Roboto', sans-serif;
     color: white;
 }
 
@@ -27,17 +28,30 @@ body {
     flex-direction: column;
 }
 
-.degree-section {
+.degrees-section {
     display: flex;
     align-items: center;
+    flex-direction: row;
     cursor: pointer;
 }
 
-.degree-section span {
+.degrees-section span {
     margin: 10px;
     font-size: 30px;
 }
 
-.degree-section h2 {
-    font-size: 40px;
+.degrees-section h2 {
+    font-size: 50px;
+}
+
+.temperature-description-container div {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.temperature-description {
+    font-size: 24px;
 }
