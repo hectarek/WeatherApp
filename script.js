@@ -18,6 +18,7 @@ window.addEventListener('load', ()=>{
 
             const api = `${proxy}https://api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/${lat},${long}`
 
+            //API call to get weather data
             fetch(api)
                 .then(response => {
                     return response.json();
